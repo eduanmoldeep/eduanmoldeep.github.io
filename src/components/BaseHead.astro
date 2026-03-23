@@ -18,11 +18,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title, description, image = FallbackImage } = Astro.props;
 ---
 
-<!-- Security headers (meta fallbacks; set real HTTP headers via Cloudflare/Netlify for full coverage) -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cusdis.com; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://cusdis.com https://formsubmit.co; frame-src https://cusdis.com;" />
 <meta http-equiv="X-Content-Type-Options" content="nosniff" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
-<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
