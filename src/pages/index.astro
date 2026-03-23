@@ -11,38 +11,221 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
+		<div class="bg-noise" aria-hidden="true"></div>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<header class="hero" id="top">
+				<div class="hero-grid">
+					<div class="hero-copy">
+						<p class="eyebrow">Lead Software Engineer · Cloud Solutions Specialist</p>
+						<h1>
+							Anmoldeep Singh Arora
+							<span>Building resilient FinTech systems and AI-powered Salesforce solutions.</span>
+						</h1>
+						<p class="lead">
+							4+ years in Salesforce and FinTech, specializing in system architecture, API performance,
+							and secure enterprise integrations. Currently driving Agentforce automation at Accenture.
+						</p>
+						<div class="cta-row">
+							<button class="btn contact-trigger" type="button" data-open-contact>Open contact form</button>
+							<a class="btn outline" href="#experience">View experience</a>
+						</div>
+						<div class="contact-row">
+							<span>Nagpur, Maharashtra, India</span>
+						</div>
+						<div class="link-row">
+							<a href="https://linkedin.com/in/eduanmoldeep" target="_blank" rel="noreferrer">LinkedIn</a>
+							<a href="https://trailblazer.salesforce.com/anmoldeeparora" target="_blank" rel="noreferrer"
+								>Salesforce Trailblazer</a
+							>
+						</div>
+					</div>
+
+					<div class="hero-card">
+						<div class="badge">Top Talent – FY25</div>
+						<h2>Key Achievements</h2>
+						<ul>
+							<li>Recognized for long-term high-quality delivery and consistent client praise.</li>
+							<li>High Five & Bravo Awards for reusable modular code across loan journeys.</li>
+							<li>Reduced data-sync turnaround by over 90% with workflow automation.</li>
+							<li>Improved parser reliability from 32% to 86% with XML upgrades.</li>
+						</ul>
+						<div class="metrics">
+							<div>
+								<p class="metric">60%</p>
+								<span>Processing time reduction</span>
+							</div>
+							<div>
+								<p class="metric">95%+</p>
+								<span>Code coverage</span>
+							</div>
+							<div>
+								<p class="metric">30%</p>
+								<span>Lower SOQL calls</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<section id="summary" class="section">
+				<div class="section-header">
+					<h2>Summary</h2>
+					<p>
+						Lead SDE specializing in Salesforce and RESTful integrations. Skilled in designing robust
+						system architectures, optimizing API performance, and building secure, scalable FinTech
+						solutions using Apex, LWC, Agentforce, and REST APIs.
+					</p>
+				</div>
+				<div class="summary-grid">
+					<div class="summary-card">
+						<h3>Current Focus</h3>
+						<p>
+							Building intelligent Agentforce agents with Einstein AI, prompt templates, and Salesforce
+							Knowledge to deflect inbound requests and improve SLA.
+						</p>
+					</div>
+					<div class="summary-card">
+						<h3>Specialties</h3>
+						<p>
+							Salesforce architecture, secure integrations, data grounding, reusable component systems,
+							and AI-powered automation.
+						</p>
+					</div>
+					<div class="summary-card">
+						<h3>Domains</h3>
+						<p>FinTech lending, loan origination, case classification, and compliance.</p>
+					</div>
+				</div>
+			</section>
+
+			<section id="experience" class="section">
+				<div class="section-header">
+					<h2>Experience</h2>
+					<p>Driving impact across Accenture and Persistent Systems in FinTech delivery.</p>
+				</div>
+
+				<div class="timeline">
+					<article class="role">
+						<div class="role-meta">
+							<h3>Packaged App Development Senior Analyst</h3>
+							<span>Accenture · Feb 2026 – Present</span>
+						</div>
+						<ul>
+							<li>Architecting Agentforce AI agents to deflect inbound RFIs using Einstein AI.</li>
+							<li>Designing case classification agent routing by topic, urgency, and skill-match.</li>
+							<li>Implementing grounding strategies with Salesforce Knowledge and Data Cloud.</li>
+							<li>Defining agent personas, conversation flows, and escalation aligned to SLAs.</li>
+						</ul>
+					</article>
+
+					<article class="role">
+						<div class="role-meta">
+							<h3>Lead Software Developer</h3>
+							<span>Persistent Systems · Sep 2025 – Jan 2026</span>
+							<span class="role-sub">Tata Capital Limited · Loan Origination (FinTech)</span>
+						</div>
+						<ul>
+							<li>Solution designer across multiple journeys with reusable module strategy.</li>
+							<li>Built workflow-driven integration reducing data-sync by 90% (hours → minutes).</li>
+							<li>Optimized org-level SOQL usage with 30% fewer calls per execution.</li>
+							<li>Led migrations cutting processing time by 60% while maintaining compliance.</li>
+						</ul>
+					</article>
+
+					<article class="role">
+						<div class="role-meta">
+							<h3>Senior Software Developer</h3>
+							<span>Persistent Systems · Jul 2024 – Sep 2025</span>
+							<span class="role-sub">Tata Capital Limited · Loan Origination (FinTech)</span>
+						</div>
+						<ul>
+							<li>Built modules for Aggregator Journeys across PL, TW, Auto, and LAS.</li>
+							<li>Designed reusable Aura components and product-agnostic APIs.</li>
+							<li>Resolved priority escalations in SIT and production with zero defects.</li>
+							<li>Delivered secure integrations with encryption and RBI compliance checks.</li>
+						</ul>
+					</article>
+
+					<article class="role">
+						<div class="role-meta">
+							<h3>Software Development Engineer</h3>
+							<span>Persistent Systems · Jun 2022 – Jul 2024</span>
+							<span class="role-sub">Tata Capital Limited · Loan Origination (FinTech)</span>
+						</div>
+						<ul>
+							<li>Contributor for Aggregator Journeys across PL, TW, and Consumer Durable loans.</li>
+							<li>Upgraded XML parsers improving reliability from 32% to 86%.</li>
+							<li>Enhanced legacy integration APIs for RBI guidelines and unit-tested delivery.</li>
+							<li>Ensured deployment readiness with 95%+ Apex code coverage.</li>
+						</ul>
+					</article>
+				</div>
+			</section>
+
+			<section id="skills" class="section">
+				<div class="section-header">
+					<h2>Skills</h2>
+					<p>Salesforce-first expertise with strong full-stack and cloud capabilities.</p>
+				</div>
+				<div class="skills-grid">
+					<div class="skills-card">
+						<h3>Salesforce</h3>
+						<p>
+							Apex, LWC, Triggers, Tests, Flows, Security Model, Validation Rules, Aura, SOQL,
+							Visualforce, Platform Events, Change Data Capture, Named Credentials, Custom Apex APIs,
+							External Objects, Modular APIs, Encryption, Agentforce, Einstein AI, Prompt Templates,
+							Agent Actions, Omni-Channel.
+						</p>
+					</div>
+					<div class="skills-card">
+						<h3>Beyond Salesforce</h3>
+						<p>
+							NodeJS, Filament PHP, Laravel, RBAC, JWT, SSO, MFA, MariaDB, Redis, Memcached, AWS
+							(Rekognition, S3, EC2, EBS), Agile/Scrum, JIRA, Confluence, Git, VS Code, SFDX CLI,
+							Data Loader, Lightning Studio, OmniStudio, REST/SOAP APIs, Swagger.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="section">
+				<div class="section-header">
+					<h2>Certifications</h2>
+					<p>Salesforce and cloud credentials focused on AI, data, and platform delivery.</p>
+				</div>
+				<div class="chips">
+					<span>Salesforce Certified JavaScript Developer (Mar 2025)</span>
+					<span>Salesforce Certified Data Cloud Consultant (Dec 2024)</span>
+					<span>Salesforce Certified Agentforce Specialist (Oct 2024)</span>
+					<span>Salesforce Certified Platform Developer II (May 2024)</span>
+					<span>Salesforce Certified AI Associate (Dec 2023)</span>
+					<span>Salesforce Certified Platform Developer I (Mar 2023)</span>
+					<span>Microsoft Certified: Azure Fundamentals AZ-900 (Jun 2022)</span>
+				</div>
+			</section>
+
+			<section id="education" class="section">
+				<div class="section-header">
+					<h2>Education</h2>
+					<p>Strong academic foundation with specialization in AI and ML.</p>
+				</div>
+				<div class="education-card">
+					<div>
+						<h3>Bachelor of Engineering in Computer Technology</h3>
+						<p>Yeshwantrao Chavan College of Engineering · 2019 – 2022</p>
+						<span>Honors: Artificial Intelligence & Machine Learning</span>
+					</div>
+					<div class="training">
+						<h4>Training / Courses</h4>
+						<ul>
+							<li>Grokking System Design Fundamentals</li>
+							<li>Grokking System Design Interview</li>
+							<li>System Design (Byte Monk Academy)</li>
+						</ul>
+					</div>
+				</div>
+			</section>
 		</main>
 		<Footer />
 	</body>
