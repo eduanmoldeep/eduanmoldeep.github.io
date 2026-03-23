@@ -35,6 +35,10 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          PUBLIC_CUSDIS_APP_ID: ${{ vars.PUBLIC_CUSDIS_APP_ID }}
+          PUBLIC_CUSDIS_HOST: ${{ vars.PUBLIC_CUSDIS_HOST }}
+          PUBLIC_FORMSUBMIT_ENDPOINT: ${{ vars.PUBLIC_FORMSUBMIT_ENDPOINT }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
