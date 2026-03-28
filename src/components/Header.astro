@@ -4,13 +4,130 @@ import HeaderLink from './HeaderLink.astro';
 ---
 
 <header class="site-header">
-	<nav class="nav">
+	<nav class="nav" data-nav>
 		<a class="logo" href="/">{SITE_TITLE}</a>
 		<div class="nav-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
-		<button class="btn ghost contact-trigger" type="button" data-open-contact>Contact</button>
+		<button class="theme-toggle theme-toggle-desktop" type="button" data-theme-toggle aria-pressed="false">
+			<span class="sr-only">Toggle color theme</span>
+			<span class="theme-toggle-dot" aria-hidden="true"></span>
+			<span class="theme-toggle-label" data-theme-label>Dark</span>
+		</button>
+		<button class="btn ghost contact-trigger nav-cta-desktop" type="button" data-open-contact>Contact</button>
+		<button
+			class="nav-toggle"
+			type="button"
+			aria-expanded="false"
+			aria-controls="nav-panel"
+			data-nav-toggle
+		>
+			<span class="sr-only">Toggle navigation</span>
+			<span class="nav-toggle-label">Menu</span>
+			<span class="nav-toggle-icon" aria-hidden="true"></span>
+		</button>
+		<div class="nav-panel" id="nav-panel" data-nav-panel hidden>
+			<div class="nav-panel-links">
+				<HeaderLink href="/">Home</HeaderLink>
+				<HeaderLink href="/blog">Blog</HeaderLink>
+				<HeaderLink href="/about">About</HeaderLink>
+			</div>
+			<button class="theme-toggle theme-toggle-mobile" type="button" data-theme-toggle aria-pressed="false">
+				<span class="sr-only">Toggle color theme</span>
+				<span class="theme-toggle-dot" aria-hidden="true"></span>
+				<span class="theme-toggle-label" data-theme-label>Dark</span>
+			</button>
+			<button class="btn contact-trigger nav-cta-mobile" type="button" data-open-contact>
+				Contact
+			</button>
+		</div>
 	</nav>
 </header>
+
+<script>
+	const nav = document.querySelector('[data-nav]');
+	const toggle = document.querySelector('[data-nav-toggle]');
+	const panel = document.querySelector('[data-nav-panel]');
+	const mediaQuery = window.matchMedia('(max-width: 900px)');
+	const themeToggles = document.querySelectorAll('[data-theme-toggle]');
+	const themeLabels = document.querySelectorAll('[data-theme-label]');
+	const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+	const storageKey = 'theme';
+
+	if (nav && toggle && panel) {
+		const setOpen = (isOpen) => {
+			nav.classList.toggle('is-open', isOpen);
+			panel.hidden = !isOpen;
+			toggle.setAttribute('aria-expanded', String(isOpen));
+		};
+
+		const closeOnDesktop = (event) => {
+			if (!event.matches) {
+				setOpen(false);
+			}
+		};
+
+		toggle.addEventListener('click', () => {
+			const isOpen = nav.classList.contains('is-open');
+			setOpen(!isOpen);
+		});
+
+		panel.addEventListener('click', (event) => {
+			const target = event.target;
+			if (target instanceof HTMLElement && (target.closest('a') || target.closest('button'))) {
+				setOpen(false);
+			}
+		});
+
+		mediaQuery.addEventListener('change', closeOnDesktop);
+	}
+
+	const getStoredTheme = () => {
+		try {
+			return localStorage.getItem(storageKey);
+		} catch {
+			return null;
+		}
+	};
+
+	const setStoredTheme = (theme) => {
+		try {
+			localStorage.setItem(storageKey, theme);
+		} catch {
+			// Ignore storage errors (private mode, disabled, etc.)
+		}
+	};
+
+	const applyTheme = (theme, persist = true) => {
+		document.documentElement.setAttribute('data-theme', theme);
+		themeToggles.forEach((button) => {
+			button.setAttribute('aria-pressed', String(theme === 'dark'));
+		});
+		themeLabels.forEach((label) => {
+			label.textContent = theme === 'dark' ? 'Light' : 'Dark';
+		});
+
+		if (persist) {
+			setStoredTheme(theme);
+		}
+	};
+
+	const initialTheme = getStoredTheme() || (prefersDark.matches ? 'dark' : 'light');
+	applyTheme(initialTheme, false);
+
+	themeToggles.forEach((button) => {
+		button.addEventListener('click', () => {
+			const current = document.documentElement.getAttribute('data-theme');
+			const next = current === 'dark' ? 'light' : 'dark';
+			applyTheme(next);
+		});
+	});
+
+	prefersDark.addEventListener('change', (event) => {
+		if (!getStoredTheme()) {
+			applyTheme(event.matches ? 'dark' : 'light', false);
+		}
+	});
+</script>
