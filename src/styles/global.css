@@ -97,6 +97,7 @@ main {
 img {
 	max-width: 100%;
 	display: block;
+	height: auto;
 }
 
 .bg-noise {
@@ -640,6 +641,12 @@ img {
 	color: inherit;
 }
 
+.blog-card picture {
+	display: block;
+	width: 100%;
+}
+
+.blog-card picture img,
 .blog-card img {
 	border-radius: 16px;
 	width: 100%;
@@ -666,6 +673,13 @@ img {
 	border-radius: 24px;
 	box-shadow: var(--shadow);
 	margin-bottom: 24px;
+	width: 100%;
+	height: auto;
+}
+
+.post-content img {
+	width: 100%;
+	height: auto;
 }
 
 .post-body {
@@ -819,8 +833,10 @@ hr {
 		grid-template-columns: 1fr;
 	}
 
+	.blog-card picture img,
 	.blog-card img {
 		height: auto;
+		object-fit: cover;
 	}
 }
 
