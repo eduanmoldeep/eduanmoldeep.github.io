@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study: Multi-Store Management Platform — White Pigeon Solutions</title>
+  <meta name="description" content="How White Pigeon Solutions built a unified sales, billing, and delivery system for three furnishing stores using Laravel, Express.js, and Flutter." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brand-dark:   #0f1923;
+      --brand-mid:    #1a2e42;
+      --brand-accent: #2e86de;
+      --brand-light:  #e8f4fd;
+      --text-primary: #1a1a2e;
+      --text-muted:   #5a6577;
+      --white:        #ffffff;
+      --surface:      #f7f9fc;
+      --border:       #dde5ee;
+      --radius:       10px;
+      --shadow-sm:    0 1px 4px rgba(0,0,0,.07);
+      --shadow-md:    0 4px 18px rgba(0,0,0,.10);
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-primary);
+      background: var(--white);
+    }
+    a { color: var(--brand-accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      background: var(--brand-dark);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -.3px;
+    }
+    .nav-back {
+      color: #8ebbdf;
+      font-size: .9rem;
+    }
+    .nav-back:hover { color: var(--white); }
+
+    /* HERO */
+    .cs-hero {
+      background: var(--brand-mid);
+      color: var(--white);
+      padding: 64px 5% 56px;
+    }
+    .cs-hero .back-link {
+      display: inline-block;
+      color: #8ebbdf;
+      font-size: .88rem;
+      margin-bottom: 28px;
+    }
+    .cs-hero .back-link:hover { color: var(--white); }
+    .cs-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    .cs-tag {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--brand-accent);
+      background: rgba(46,134,222,.15);
+      padding: 4px 12px;
+      border-radius: 4px;
+    }
+    .cs-hero h1 {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      max-width: 760px;
+    }
+    .cs-hero .subtitle {
+      font-size: 1.1rem;
+      color: #9db8d4;
+      max-width: 680px;
+    }
+    .meta-row {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+    .meta-item { }
+    .meta-label {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #6b8dad;
+      margin-bottom: 4px;
+    }
+    .meta-value {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    /* BODY */
+    .cs-body {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 56px 5%;
+    }
+    .cs-body h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-top: 48px;
+      margin-bottom: 16px;
+      color: var(--brand-dark);
+    }
+    .cs-body h2:first-child { margin-top: 0; }
+    .cs-body p { margin-bottom: 16px; color: var(--text-primary); }
+    .cs-body ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+    .cs-body ul li {
+      padding: 10px 0 10px 24px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      font-size: .95rem;
+      color: var(--text-muted);
+    }
+    .cs-body ul li:last-child { border-bottom: none; }
+    .cs-body ul li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--brand-accent);
+      font-weight: 700;
+    }
+
+    /* FEATURE BLOCKS */
+    .feature-block {
+      background: var(--surface);
+      border-left: 3px solid var(--brand-accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+    .feature-block h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--brand-dark);
+    }
+    .feature-block p {
+      margin: 0;
+      font-size: .92rem;
+      color: var(--text-muted);
+    }
+
+    /* TESTIMONIAL */
+    .testimonial {
+      background: var(--brand-light);
+      border-radius: var(--radius);
+      padding: 32px 36px;
+      margin: 40px 0;
+      position: relative;
+    }
+    .testimonial::before {
+      content: "\201C";
+      font-size: 5rem;
+      line-height: 1;
+      color: var(--brand-accent);
+      opacity: .2;
+      position: absolute;
+      top: 8px;
+      left: 20px;
+      font-family: Georgia, serif;
+    }
+    .testimonial blockquote {
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .testimonial cite {
+      font-size: .88rem;
+      font-style: normal;
+      font-weight: 700;
+      color: var(--brand-mid);
+    }
+
+    /* OUTCOMES */
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .outcome-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .outcome-icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .outcome-card p { font-size: .88rem; color: var(--text-muted); margin: 0; }
+
+    /* STACK TABLE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: .9rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      font-weight: 700;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--text-muted);
+      background: var(--surface);
+    }
+    td:first-child { color: var(--text-muted); font-size: .88rem; }
+    td:last-child { font-weight: 600; color: var(--brand-dark); }
+
+    /* CTA */
+    .cta-band {
+      background: var(--brand-dark);
+      color: var(--white);
+      padding: 56px 5%;
+      text-align: center;
+    }
+    .cta-band h2 { font-size: 1.6rem; margin-bottom: 12px; }
+    .cta-band p { color: #9db8d4; margin-bottom: 28px; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--brand-accent);
+      color: var(--white);
+      padding: 14px 34px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: opacity .15s;
+    }
+    .btn-primary:hover { opacity: .88; text-decoration: none; }
+
+    /* FOOTER */
+    footer {
+      background: var(--brand-mid);
+      color: #7a9ab8;
+      padding: 28px 5%;
+      text-align: center;
+      font-size: .85rem;
+    }
+    footer a { color: #8ebbdf; }
+
+    @media (max-width: 600px) {
+      .meta-row { gap: 24px; }
+      .cs-hero { padding: 40px 5% 36px; }
+      .cs-body { padding: 40px 5%; }
+      .testimonial { padding: 24px 24px 24px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">White Pigeon Solutions</span>
+  <a href="portfolio-site.html#case-studies" class="nav-back">← Back to portfolio</a>
+</nav>
+
+<!-- HERO -->
+<div class="cs-hero">
+  <a href="portfolio-site.html#case-studies" class="back-link">← All case studies</a>
+  <div class="cs-tags">
+    <span class="cs-tag">Web App</span>
+    <span class="cs-tag">Mobile App</span>
+    <span class="cs-tag">API</span>
+  </div>
+  <h1>Unified Management Platform for Three Furnishing Stores</h1>
+  <p class="subtitle">
+    One admin panel, one mobile app, three stores — replacing spreadsheets and handwritten bills
+    with real-time sales, PDF generation, and offline-capable mobile access.
+  </p>
+  <div class="meta-row">
+    <div class="meta-item">
+      <div class="meta-label">Client</div>
+      <div class="meta-value">Kaushal Decor · Pratap Home Furnishings · Lakshya Furnishers</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Industry</div>
+      <div class="meta-value">Retail — Home Furnishings</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Stack</div>
+      <div class="meta-value">Laravel · Filament · Express.js · Flutter</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Delivery</div>
+      <div class="meta-value">₹36,000</div>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="cs-body">
+
+  <h2>The Challenge</h2>
+  <p>
+    Lakshya Sangtani manages three furnishing stores under the same roof — Kaushal Decor,
+    Pratap Home Furnishings, and Lakshya Furnishers. Each store had its own staff, product
+    lines, and customer base, but all three were running on a patchwork of spreadsheets,
+    handwritten bills, and informal delivery notes.
+  </p>
+  <p>The specific pain points that drove the project:</p>
+  <ul>
+    <li><strong>No unified billing</strong> — every sale had to be manually written up and tracked across three separate ledgers</li>
+    <li><strong>No mobile access</strong> — staff could only log sales or check stock when they were physically at a desktop computer</li>
+    <li><strong>No delivery trail</strong> — delivery confirmations were verbal or informal, making disputes difficult to resolve</li>
+    <li><strong>Zero cross-store visibility</strong> — there was no single view of how the business was performing across all three locations</li>
+  </ul>
+
+  <h2>What We Built</h2>
+
+  <div class="feature-block">
+    <h3>Web Admin Panel — Laravel 11 + Filament 3.2</h3>
+    <p>
+      A full-featured admin panel that manages all three stores from one dashboard.
+      Sales and billing with fiscal-year bill numbering and one-click PDF generation.
+      Product catalog with categories and master products shared across stores.
+      Customer management with full purchase history. Delivery memos with PDF export.
+      Role-based access control so each store's staff only sees what they need.
+    </p>
+  </div>
+
+  <div class="feature-block">
+    <h3>REST API — Express.js (Node.js)</h3>
+    <p>
+      A purpose-built backend that powers the mobile app. Full CRUD for all entities —
+      sales, customers, products, payments, delivery memos. JWT authentication with
+      refresh tokens. Rate limiting, audit logs, and 96 automated tests covering every endpoint.
+      Built to OWASP Top 10 security standards.
+    </p>
+  </div>
+
+  <div class="feature-block">
+    <h3>Mobile App — Flutter (web + mobile)</h3>
+    <p>
+      A cross-platform app that lets field staff do the full sales workflow from a phone:
+      create a sale, add line items, record payments, manage customers, and generate PDF bills
+      on the spot. Biometric login (fingerprint / face ID) for quick, secure access.
+      Offline-first architecture — sales recorded without connectivity sync automatically
+      when the device reconnects.
+    </p>
+  </div>
+
+  <h2>The Outcome</h2>
+  <div class="outcomes-grid">
+    <div class="outcome-card">
+      <div class="outcome-icon">🏬</div>
+      <p>All 3 stores managed from a single unified dashboard</p>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-icon">📄</div>
+      <p>PDF bills and delivery memos generated in seconds — no handwritten records</p>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-icon">📱</div>
+      <p>Staff can work from mobile, including offline in low-connectivity areas</p>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-icon">🔒</div>
+      <p>Full audit trail on every transaction with biometric login for staff security</p>
+    </div>
+  </div>
+
+  <div class="testimonial">
+    <blockquote>
+      "We manage three furnishing stores — Kaushal Decor, Pratap Home Furnishings, and Lakshya Furnishers.
+      The system they built handles all our sales, billing, and delivery tracking in one place.
+      Bills and delivery memos are now a few taps, and the team can even work offline.
+      Really happy with what was delivered."
+    </blockquote>
+    <cite>— Lakshya Sangtani, Kaushal Decor / Pratap Home Furnishings / Lakshya Furnishers</cite>
+  </div>
+
+  <h2>Tech Stack</h2>
+  <table>
+    <tr><th>Layer</th><th>Technology</th></tr>
+    <tr><td>Admin panel</td><td>Laravel 11 + Filament 3.2</td></tr>
+    <tr><td>REST API</td><td>Express.js (Node.js)</td></tr>
+    <tr><td>Mobile / Web app</td><td>Flutter</td></tr>
+    <tr><td>Database</td><td>MySQL</td></tr>
+    <tr><td>Authentication</td><td>JWT + refresh tokens</td></tr>
+    <tr><td>PDF generation</td><td>Server-side PDF (bills + delivery memos)</td></tr>
+    <tr><td>Testing</td><td>Jest — 96 tests</td></tr>
+    <tr><td>Security</td><td>OWASP Top 10 review</td></tr>
+  </table>
+
+</div>
+
+<div class="cta-band">
+  <h2>Need a custom system for your business?</h2>
+  <p>We build focused software that solves real operational problems — not templates, not cookie-cutter SaaS.</p>
+  <a href="portfolio-site.html#contact" class="btn-primary">Get in touch</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 White Pigeon Solutions. All rights reserved. &nbsp;·&nbsp;
+    <a href="portfolio-site.html">Portfolio</a>
+  </p>
+</footer>
+
+</body>
+</html>
