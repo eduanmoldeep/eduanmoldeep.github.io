@@ -198,25 +198,48 @@ const homeTitle = `${SITE_TITLE} · Salesforce, Agentforce & FinTech Solutions`;
 					</div>
 
 					<div class="hero-card">
-						<div class="badge">Top Talent – FY25</div>
-						<div class="hero-mascot" aria-hidden="true">
-							<svg viewBox="0 0 120 120">
-								<defs>
-									<linearGradient id="mascotGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-										<stop offset="0%" stop-color="rgba(242, 80, 47, 0.75)" />
-										<stop offset="100%" stop-color="rgba(47, 140, 133, 0.75)" />
-									</linearGradient>
-								</defs>
-								<circle class="mascot-body" cx="60" cy="60" r="38" fill="url(#mascotGradient)" />
-								<circle class="mascot-eye" cx="48" cy="54" r="5" fill="#0f1115" />
-								<circle class="mascot-eye" cx="72" cy="54" r="5" fill="#0f1115" />
-								<path class="mascot-smile" d="M46 70c8 10 20 10 28 0" fill="none" stroke="#0f1115" stroke-width="4" stroke-linecap="round" />
-								<circle class="mascot-blush" cx="42" cy="66" r="4" fill="rgba(242, 80, 47, 0.5)" />
-								<circle class="mascot-blush" cx="78" cy="66" r="4" fill="rgba(47, 140, 133, 0.5)" />
-							</svg>
+						<div class="hero-card-head">
+							<div>
+								<div class="badge">Top Talent – FY25</div>
+								<h2>Results in production</h2>
+								<p class="hero-card-sub">Measured outcomes from enterprise FinTech delivery.</p>
+							</div>
+							<!-- Decorative "system architecture" emblem: a hub orchestrating four connected systems -->
+							<div class="hero-emblem" aria-hidden="true">
+								<svg viewBox="0 0 120 120" focusable="false">
+									<defs>
+										<linearGradient id="emblemHub" x1="0%" y1="0%" x2="100%" y2="100%">
+											<stop class="emblem-stop-a" offset="0%" />
+											<stop class="emblem-stop-b" offset="100%" />
+										</linearGradient>
+									</defs>
+									<circle class="emblem-backdrop" cx="60" cy="60" r="56" />
+									<circle class="emblem-orbit" cx="60" cy="60" r="50" pathLength="100" />
+									<circle class="emblem-ring" cx="60" cy="60" r="26" />
+									<g class="emblem-links">
+										<line x1="60" y1="60" x2="95.36" y2="24.64" />
+										<line x1="60" y1="60" x2="95.36" y2="95.36" />
+										<line x1="60" y1="60" x2="24.64" y2="95.36" />
+										<line x1="60" y1="60" x2="24.64" y2="24.64" />
+									</g>
+									<g class="emblem-flow">
+										<line class="flow-out" x1="60" y1="60" x2="95.36" y2="24.64" pathLength="100" />
+										<line class="flow-in" x1="60" y1="60" x2="95.36" y2="95.36" pathLength="100" />
+										<line class="flow-out flow-late" x1="60" y1="60" x2="24.64" y2="95.36" pathLength="100" />
+										<line class="flow-in flow-late" x1="60" y1="60" x2="24.64" y2="24.64" pathLength="100" />
+									</g>
+									<g class="emblem-nodes">
+										<rect x="89.36" y="18.64" width="12" height="12" rx="3" />
+										<circle cx="95.36" cy="95.36" r="6.5" />
+										<rect x="18.64" y="89.36" width="12" height="12" rx="3" />
+										<circle cx="24.64" cy="24.64" r="6.5" />
+									</g>
+									<circle class="emblem-pulse" cx="60" cy="60" r="14" />
+									<circle class="emblem-hub" cx="60" cy="60" r="14" fill="url(#emblemHub)" />
+									<circle class="emblem-core" cx="60" cy="60" r="4.5" />
+								</svg>
+							</div>
 						</div>
-						<h2>Results in production</h2>
-						<p class="hero-card-sub">Measured outcomes from enterprise FinTech delivery.</p>
 						<ul class="proof-grid">
 							{
 								proofStats.map((stat) => (
