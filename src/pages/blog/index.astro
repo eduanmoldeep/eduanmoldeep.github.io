@@ -15,16 +15,16 @@ const posts = (await getCollection('blog')).sort(
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`${SITE_TITLE} · Blog`} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Blog · ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<div class="bg-noise" aria-hidden="true"></div>
 		<Header />
-		<main class="page">
+		<main class="page" id="main">
 			<section class="section blog-hero">
 				<div class="section-header">
 					<h1>Blog</h1>
-					<p>Thoughts on Salesforce architecture, system design, and AI-driven automation.</p>
+					<p>Notes from the build: Salesforce architecture, system design, AI automation, and the occasional hands-on hardware fix.</p>
 				</div>
 				<a class="btn outline" href="/rss.xml">RSS feed</a>
 			</section>

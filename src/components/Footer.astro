@@ -1,22 +1,28 @@
 ---
+import { LINKEDIN_URL, SITE_TITLE, TRAILBLAZER_URL } from '../consts';
+
 const today = new Date();
 ---
 
 <footer class="site-footer" id="contact">
-	<div>
-		<h2>Let’s build the next platform</h2>
-		<p>Open to collaboration on Salesforce, AI automation, and FinTech systems.</p>
+	<div class="footer-pitch">
+		<p class="footer-kicker">Have a process that’s slow, manual or hard to scale?</p>
+		<h2>Let’s design the fix together.</h2>
+		<p>
+			Agentforce agents, Salesforce integrations, FinTech journeys or a full-time role: tell me what
+			you’re trying to solve and I’ll share how I’d approach it.
+		</p>
 	</div>
 	<div class="footer-links">
-		<button class="btn contact-trigger" type="button" data-open-contact>Open contact form</button>
-		<div class="footer-meta">
-			<span>Nagpur, Maharashtra, India</span>
-		</div>
+		<button class="btn btn-accent contact-trigger" type="button" data-open-contact>Discuss your project</button>
 		<div class="footer-social">
-			<a href="https://linkedin.com/in/eduanmoldeep" target="_blank" rel="noreferrer">LinkedIn</a>
-			<a href="https://www.salesforce.com/trailblazer/anmoldeeparora" target="_blank" rel="noreferrer">Salesforce Trailblazer</a>
+			<a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+			<a href={TRAILBLAZER_URL} target="_blank" rel="noreferrer">Salesforce Trailblazer ↗</a>
 		</div>
-		<span class="footer-copy">© {today.getFullYear()} Anmoldeep Singh Arora. All rights reserved.</span>
+		<div class="footer-meta">
+			<span>Nagpur, Maharashtra, India · open to remote</span>
+		</div>
+		<span class="footer-copy">© {today.getFullYear()} {SITE_TITLE}. All rights reserved.</span>
 	</div>
 </footer>
 
@@ -27,7 +33,12 @@ const today = new Date();
 		action={import.meta.env.PUBLIC_FORMSUBMIT_ENDPOINT}
 	>
 		<div class="contact-header">
-			<h3 id="contact-title">Start a project</h3>
+			<div>
+				<h3 id="contact-title">Tell me about the problem</h3>
+				<p class="contact-intro">
+					A few lines on the current setup, what’s not working and your timeline is plenty.
+				</p>
+			</div>
 			<button class="contact-close" type="button" data-close-contact>Close</button>
 		</div>
 		<div class="contact-grid">
@@ -49,9 +60,26 @@ const today = new Date();
 			</label>
 		</div>
 		<label>
-			Message
-			<textarea name="message" rows="5" placeholder="Tell me about your project or role." required></textarea>
+			What do you need help with?
+			<select name="topic">
+				<option value="Agentforce / AI agents">Agentforce / AI agents</option>
+				<option value="Salesforce architecture or integration">Salesforce architecture or integration</option>
+				<option value="FinTech / lending journey">FinTech / lending journey</option>
+				<option value="Custom build beyond Salesforce">Custom build beyond Salesforce</option>
+				<option value="Full-time role">Full-time role</option>
+				<option value="Something else">Something else</option>
+			</select>
 		</label>
+		<label>
+			Message
+			<textarea
+				name="message"
+				rows="5"
+				placeholder="What are you trying to solve, and what does success look like?"
+				required
+			></textarea>
+		</label>
+		<input type="hidden" name="_subject" value="New enquiry from your portfolio" />
 		<!-- Honeypot: hidden field to catch bots — real users leave this blank -->
 		<input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 		<button class="btn" type="submit">Send message</button>

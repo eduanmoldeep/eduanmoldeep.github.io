@@ -2,49 +2,124 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { SITE_TITLE } from '../consts';
 
-const title = `About — ${SITE_TITLE}`;
+const title = `About · ${SITE_TITLE}`;
+const description =
+	'How Anmoldeep Singh Arora approaches Salesforce, Agentforce and FinTech solutions: outcome-first design, reusable architecture, and compliance built in from day one.';
+
+const principles = [
+	{
+		title: 'Start from the outcome',
+		body: 'A solution is measured by what it changes: sync time, processing time, how many requests never need a human. I agree on that number before I choose a tool.',
+	},
+	{
+		title: 'Build it once, reuse it everywhere',
+		body: 'Product-agnostic APIs and reusable components meant a new loan journey didn’t start from scratch. That approach earned High Five and Bravo awards for modular code.',
+	},
+	{
+		title: 'Compliance is a design input',
+		body: 'Encryption, RBI guidelines, access control and test coverage go into the first design, not a checklist at the end. That’s how priority fixes reach production with zero defects.',
+	},
+];
+
+const milestones = [
+	{ year: '2022', text: 'Joined Persistent Systems on Tata Capital’s loan origination platform.' },
+	{ year: '2022–24', text: 'Took XML parser reliability from 32% to 86% on RBI-regulated integrations.' },
+	{ year: '2024', text: 'Promoted to Senior Developer; Platform Developer II, Data Cloud and Agentforce certified.' },
+	{ year: '2025', text: 'Lead Developer and solution designer; 90% faster data sync. Named Top Talent FY25.' },
+	{ year: '2026', text: 'Joined Accenture to architect Agentforce AI agents for enterprise service teams.' },
+];
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={SITE_DESCRIPTION} />
+		<BaseHead title={title} description={description} />
 	</head>
 	<body>
 		<div class="bg-noise" aria-hidden="true"></div>
 		<Header />
-		<main class="page">
-			<section class="section">
+		<main class="page" id="main">
+			<section class="section about-intro">
 				<div class="section-header">
-					<h1>About</h1>
+					<p class="section-kicker">About</p>
+					<h1>I design systems that remove work from people’s day.</h1>
 					<p>
-						I’m Anmoldeep Singh Arora, a Lead Software Engineer focused on Salesforce architecture,
-						FinTech systems, and AI-powered automation. I’ve delivered secure lending journeys,
-						workflow-driven integrations, and Agentforce solutions that reduce manual effort and
-						improve customer response times.
+						I’m Anmoldeep Singh Arora, a Salesforce solution engineer based in Nagpur, India. For four
+						years I’ve worked on FinTech lending: multi-product loan origination journeys, secure
+						integrations, and the performance work that keeps them fast at scale. Today at Accenture I
+						architect Agentforce AI agents that answer and route inbound requests so skilled people can
+						focus on the hard cases.
+					</p>
+					<p>
+						My best work happens when a process is slow, manual or fragile and needs someone who can
+						see the whole picture: the business flow, the data model, platform limits and compliance.
+						Then I build it.
 					</p>
 				</div>
-				<div class="summary-grid">
-					<div class="summary-card">
-						<h3>What I love building</h3>
-						<p>
-							Reusable architectures, clean system design, and integrations that feel effortless
-							for end users.
-						</p>
-					</div>
+			</section>
+
+			<section class="section">
+				<div class="section-header">
+					<p class="section-kicker">Principles</p>
+					<h2>How I think about solutions</h2>
+				</div>
+				<div class="service-grid">
+					{
+						principles.map((item, index) => (
+							<article class="service-card">
+								<span class="service-index" aria-hidden="true">
+									{String(index + 1).padStart(2, '0')}
+								</span>
+								<h3>{item.title}</h3>
+								<p>{item.body}</p>
+							</article>
+						))
+					}
+				</div>
+			</section>
+
+			<section class="section">
+				<div class="section-header">
+					<p class="section-kicker">Career</p>
+					<h2>At a glance</h2>
+				</div>
+				<ol class="milestones">
+					{
+						milestones.map((m) => (
+							<li>
+								<span class="milestone-year">{m.year}</span>
+								<p>{m.text}</p>
+							</li>
+						))
+					}
+				</ol>
+				<div class="cta-row">
+					<a class="btn" href="/#work">See case studies</a>
+					<button class="btn outline contact-trigger" type="button" data-open-contact>Discuss your project</button>
+				</div>
+			</section>
+
+			<section class="section">
+				<div class="summary-grid summary-grid-3">
 					<div class="summary-card">
 						<h3>Where I’m heading</h3>
 						<p>
-							Expanding Agentforce automation and knowledge-grounded AI agents for enterprise teams.
+							Knowledge-grounded AI agents for enterprise teams: Agentforce, Data Cloud and the
+							integration work that makes agents trustworthy.
+						</p>
+					</div>
+					<div class="summary-card">
+						<h3>How I keep sharp</h3>
+						<p>
+							System design study (Grokking, Byte Monk Academy), Salesforce certifications, and hands-on
+							experiments with new platform tools.
 						</p>
 					</div>
 					<div class="summary-card">
 						<h3>Beyond work</h3>
-						<p>
-							System design learning, mentoring teammates, and experimenting with new platform tools.
-						</p>
+						<p>Mentoring teammates, writing about what I build, and tinkering with hardware.</p>
 					</div>
 				</div>
 			</section>

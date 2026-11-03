@@ -1,22 +1,29 @@
 ---
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
+
+const navItems = [
+	{ href: '/#services', label: 'Services' },
+	{ href: '/#work', label: 'Work' },
+	{ href: '/#experience', label: 'Experience' },
+	{ href: '/blog', label: 'Blog' },
+	{ href: '/about', label: 'About' },
+];
 ---
 
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
 	<nav class="nav" data-nav>
 		<a class="logo" href="/">{SITE_TITLE}</a>
 		<div class="nav-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
+			{navItems.map((item) => <HeaderLink href={item.href}>{item.label}</HeaderLink>)}
 		</div>
 		<button class="theme-toggle theme-toggle-desktop" type="button" data-theme-toggle aria-pressed="false">
 			<span class="sr-only">Toggle color theme</span>
 			<span class="theme-toggle-dot" aria-hidden="true"></span>
 			<span class="theme-toggle-label" data-theme-label>Dark</span>
 		</button>
-		<button class="btn ghost contact-trigger nav-cta-desktop" type="button" data-open-contact>Contact</button>
+		<button class="btn ghost contact-trigger nav-cta-desktop" type="button" data-open-contact>Let’s talk</button>
 		<button
 			class="nav-toggle"
 			type="button"
@@ -30,9 +37,7 @@ import HeaderLink from './HeaderLink.astro';
 		</button>
 		<div class="nav-panel" id="nav-panel" data-nav-panel hidden>
 			<div class="nav-panel-links">
-				<HeaderLink href="/">Home</HeaderLink>
-				<HeaderLink href="/blog">Blog</HeaderLink>
-				<HeaderLink href="/about">About</HeaderLink>
+				{navItems.map((item) => <HeaderLink href={item.href}>{item.label}</HeaderLink>)}
 			</div>
 			<button class="theme-toggle theme-toggle-mobile" type="button" data-theme-toggle aria-pressed="false">
 				<span class="sr-only">Toggle color theme</span>
@@ -40,7 +45,7 @@ import HeaderLink from './HeaderLink.astro';
 				<span class="theme-toggle-label" data-theme-label>Dark</span>
 			</button>
 			<button class="btn contact-trigger nav-cta-mobile" type="button" data-open-contact>
-				Contact
+				Let’s talk
 			</button>
 		</div>
 	</nav>
@@ -50,7 +55,7 @@ import HeaderLink from './HeaderLink.astro';
 	const nav = document.querySelector('[data-nav]');
 	const toggle = document.querySelector('[data-nav-toggle]');
 	const panel = document.querySelector('[data-nav-panel]');
-	const mediaQuery = window.matchMedia('(max-width: 900px)');
+	const mediaQuery = window.matchMedia('(max-width: 1024px)');
 	const themeToggles = document.querySelectorAll('[data-theme-toggle]');
 	const themeLabels = document.querySelectorAll('[data-theme-label]');
 	const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
