@@ -10,7 +10,7 @@ Live site: https://eduanmoldeep.github.io
 - [Astro](https://astro.build) static site, deployed to GitHub Pages via `.github/workflows/deploy.yml`
 - Self-hosted fonts (Fraunces, Space Grotesk), light/dark theme
 - Blog posts in `src/content/blog/` (Markdown/MDX) with RSS and sitemap
-- Contact form posts to the endpoint in `PUBLIC_FORMSUBMIT_ENDPOINT`; blog comments use Cusdis (`PUBLIC_CUSDIS_*`)
+- Contact form posts JSON to the Cloudflare Worker in `worker/` (URL in `PUBLIC_CONTACT_ENDPOINT`), which sends mail via Resend. Deploy: set `RESEND_API_KEY`, `TO_EMAIL`, `FROM_EMAIL`, `ALLOWED_ORIGIN` via `npx wrangler secret put` in `worker/`, then `npx wrangler deploy`; blog comments use Cusdis (`PUBLIC_CUSDIS_*`)
 
 ## Editing content
 

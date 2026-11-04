@@ -1,0 +1,10 @@
+name = "portfolio-contact"
+main = "contact.js"
+compatibility_date = "2025-01-01"
+
+# No values hardcoded. Set these as env vars / secrets:
+#   npx wrangler secret put RESEND_API_KEY
+#   npx wrangler secret put TO_EMAIL        # where enquiries land
+#   npx wrangler secret put FROM_EMAIL      # e.g. "Portfolio <contact@yourdomain.com>" (domain verified in Resend)
+#   npx wrangler secret put ALLOWED_ORIGIN  # e.g. https://eduanmoldeep.github.io
+# Local dev: copy .dev.vars.example to .dev.vars

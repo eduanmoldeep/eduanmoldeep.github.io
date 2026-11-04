@@ -38,7 +38,7 @@ jobs:
         env:
           PUBLIC_CUSDIS_APP_ID: ${{ vars.PUBLIC_CUSDIS_APP_ID || secrets.PUBLIC_CUSDIS_APP_ID }}
           PUBLIC_CUSDIS_HOST: ${{ vars.PUBLIC_CUSDIS_HOST || secrets.PUBLIC_CUSDIS_HOST }}
-          PUBLIC_FORMSUBMIT_ENDPOINT: ${{ vars.PUBLIC_FORMSUBMIT_ENDPOINT || secrets.PUBLIC_FORMSUBMIT_ENDPOINT }}
+          PUBLIC_CONTACT_ENDPOINT: ${{ vars.PUBLIC_CONTACT_ENDPOINT || secrets.PUBLIC_CONTACT_ENDPOINT }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

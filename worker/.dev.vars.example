@@ -1,0 +1,4 @@
+RESEND_API_KEY=
+TO_EMAIL=
+FROM_EMAIL=Portfolio <onboarding@resend.dev>
+ALLOWED_ORIGIN=http://localhost:4321
