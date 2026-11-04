@@ -30,7 +30,7 @@ const today = new Date();
 	<form
 		class="contact-form"
 		method="post"
-		action={import.meta.env.PUBLIC_FORMSUBMIT_ENDPOINT}
+		data-endpoint={import.meta.env.PUBLIC_CONTACT_ENDPOINT}
 	>
 		<div class="contact-header">
 			<div>
@@ -79,10 +79,10 @@ const today = new Date();
 				required
 			></textarea>
 		</label>
-		<input type="hidden" name="_subject" value="New enquiry from your portfolio" />
 		<!-- Honeypot: hidden field to catch bots — real users leave this blank -->
 		<input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 		<button class="btn" type="submit">Send message</button>
+		<p class="contact-status" role="status" aria-live="polite"></p>
 	</form>
 </dialog>
 
@@ -101,6 +101,29 @@ const today = new Date();
 		dialog.addEventListener('click', (event) => {
 			if (event.target === dialog) {
 				dialog.close();
+			}
+		});
+
+		const form = dialog.querySelector<HTMLFormElement>('.contact-form');
+		const status = dialog.querySelector<HTMLElement>('.contact-status');
+		form?.addEventListener('submit', async (event) => {
+			event.preventDefault();
+			const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+			if (button) button.disabled = true;
+			if (status) status.textContent = 'Sending…';
+			try {
+				const res = await fetch(form.dataset.endpoint ?? '', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(Object.fromEntries(new FormData(form))),
+				});
+				if (!res.ok) throw new Error(String(res.status));
+				form.reset();
+				if (status) status.textContent = 'Thanks! Message sent. I’ll reply soon.';
+			} catch {
+				if (status) status.textContent = 'Could not send. Please try LinkedIn instead.';
+			} finally {
+				if (button) button.disabled = false;
 			}
 		});
 	}
