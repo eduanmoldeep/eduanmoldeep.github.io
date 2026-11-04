@@ -2,18 +2,155 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE, TRAILBLAZER_URL, LINKEDIN_URL } from '../consts';
+
+const proofStats = [
+	{ value: '90%', label: 'faster data sync', detail: 'hours → minutes' },
+	{ value: '60%', label: 'less processing time', detail: 'across migrations' },
+	{ value: '32→86%', label: 'parser reliability', detail: 'legacy XML integrations' },
+	{ value: '30%', label: 'fewer SOQL calls', detail: 'per execution' },
+];
+
+const services = [
+	{
+		title: 'Agentforce & AI agents',
+		body: 'Agents that deflect routine requests, route cases by topic, urgency and skill, and stay grounded in Salesforce Knowledge and Data Cloud, with escalation paths built around your SLAs.',
+		outcome: 'Fewer tickets reaching a human, faster first response',
+	},
+	{
+		title: 'Salesforce architecture & integration',
+		body: 'REST and event-driven integrations (Platform Events, CDC, Named Credentials) designed as reusable, product-agnostic modules that stay inside governor limits as volume grows.',
+		outcome: 'Data sync cut from hours to minutes',
+	},
+	{
+		title: 'FinTech & regulated journeys',
+		body: 'Loan origination journeys across Personal, Two-Wheeler, Auto, LAS and Consumer Durable loans, with encryption and RBI compliance built into the design from the start.',
+		outcome: 'Priority escalations resolved with zero defects',
+	},
+	{
+		title: 'Full-stack builds beyond Salesforce',
+		body: 'When Salesforce isn’t the right fit: Laravel / Filament admin panels, Node.js services and AWS-hosted backends with RBAC, JWT, SSO and MFA built in.',
+		outcome: 'The right platform for the problem, not just the familiar one',
+	},
+];
+
+const caseStudies = [
+	{
+		client: 'Tata Capital · Loan Origination',
+		via: 'Persistent Systems',
+		title: 'Workflow-driven sync for a multi-product lending platform',
+		challenge:
+			'Data synchronisation inside the loan origination platform took hours, slowing every journey that depended on it, while SOQL usage kept pressing against org limits.',
+		approach:
+			'Designed a workflow-driven integration on reusable, product-agnostic modules shared across journeys, and reworked query patterns at the org level.',
+		results: [
+			{ value: '90%', label: 'faster sync (hours → minutes)' },
+			{ value: '30%', label: 'fewer SOQL calls per execution' },
+		],
+		tags: ['Apex', 'Integration design', 'Performance'],
+	},
+	{
+		client: 'Tata Capital · Loan Origination',
+		via: 'Persistent Systems',
+		title: 'Making legacy integrations reliable and RBI-ready',
+		challenge:
+			'Legacy XML parsers succeeded only about a third of the time, and the integration APIs behind them had to meet updated RBI guidelines.',
+		approach:
+			'Upgraded the XML parsing layer and enhanced the legacy integration APIs, then shipped behind unit tests with 95%+ Apex coverage so production deploys were low-risk.',
+		results: [
+			{ value: '32→86%', label: 'parser reliability' },
+			{ value: '95%+', label: 'Apex code coverage' },
+		],
+		tags: ['XML / REST', 'Compliance', 'Testing'],
+	},
+	{
+		client: 'Enterprise service operations',
+		via: 'Accenture',
+		status: 'Current engagement',
+		title: 'Agentforce agents that deflect inbound RFIs',
+		challenge:
+			'Inbound requests for information were handled manually, tying up skilled agents and stretching response times against SLAs.',
+		approach:
+			'Architecting Agentforce agents with Einstein AI and prompt templates, grounded in Salesforce Knowledge and Data Cloud, plus a classification agent that routes cases by topic, urgency and skill-match, with personas and escalation flows defined against SLAs.',
+		results: [],
+		measure: 'In rollout. Success is measured on deflection rate and SLA attainment.',
+		tags: ['Agentforce', 'Einstein AI', 'Data Cloud'],
+	},
+];
+
+const process = [
+	{
+		step: '01',
+		title: 'Discover',
+		body: 'Map the process, the data and the constraints (compliance, platform limits, SLAs) before choosing a tool.',
+	},
+	{
+		step: '02',
+		title: 'Design',
+		body: 'Reusable modules and clear integration contracts, so the second journey costs less than the first.',
+	},
+	{
+		step: '03',
+		title: 'Build',
+		body: 'Security and tests from day one: encryption, RBAC, compliance checks and 95%+ code coverage.',
+	},
+	{
+		step: '04',
+		title: 'Measure & improve',
+		body: 'Track what matters, like sync time, queries per transaction and deflection rate, and keep tuning.',
+	},
+];
+
+const skillGroups = [
+	{
+		title: 'AI & Agentforce',
+		items: ['Agentforce', 'Einstein AI', 'Prompt Templates', 'Agent Actions', 'Data Cloud', 'Omni-Channel'],
+	},
+	{
+		title: 'Salesforce platform',
+		items: ['Apex', 'LWC', 'Aura', 'Flows', 'Triggers', 'SOQL', 'Visualforce', 'Security Model', 'Validation Rules', 'OmniStudio', 'Lightning Studio'],
+	},
+	{
+		title: 'Integration',
+		items: ['REST / SOAP APIs', 'Custom Apex APIs', 'Modular APIs', 'Named Credentials', 'Platform Events', 'Change Data Capture', 'External Objects', 'Swagger'],
+	},
+	{
+		title: 'Security & compliance',
+		items: ['Encryption', 'RBAC', 'JWT', 'SSO', 'MFA', 'RBI guidelines'],
+	},
+	{
+		title: 'Full-stack & cloud',
+		items: ['Node.js', 'Laravel', 'Filament PHP', 'MariaDB', 'Redis', 'Memcached', 'AWS (S3, EC2, EBS, Rekognition)'],
+	},
+	{
+		title: 'Delivery',
+		items: ['Agile / Scrum', 'JIRA', 'Confluence', 'Git', 'SFDX CLI', 'Data Loader', 'VS Code'],
+	},
+];
+
+const certifications = [
+	{ name: 'JavaScript Developer', issuer: 'Salesforce', date: 'Mar 2025' },
+	{ name: 'Data Cloud Consultant', issuer: 'Salesforce', date: 'Dec 2024' },
+	{ name: 'Agentforce Specialist', issuer: 'Salesforce', date: 'Oct 2024' },
+	{ name: 'Platform Developer II', issuer: 'Salesforce', date: 'May 2024' },
+	{ name: 'AI Associate', issuer: 'Salesforce', date: 'Dec 2023' },
+	{ name: 'Platform Developer I', issuer: 'Salesforce', date: 'Mar 2023' },
+	{ name: 'Azure Fundamentals (AZ-900)', issuer: 'Microsoft', date: 'Jun 2022' },
+];
+
+const salesforceCertCount = certifications.filter((c) => c.issuer === 'Salesforce').length;
+const homeTitle = `${SITE_TITLE} · Salesforce, Agentforce & FinTech Solutions`;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={homeTitle} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<div class="bg-noise" aria-hidden="true"></div>
 		<Header />
-		<main>
+		<main id="main">
 			<header class="hero" id="top">
 				<div class="hero-shapes" aria-hidden="true">
 					<svg class="hero-shape hero-shape-1" viewBox="0 0 220 220">
@@ -31,108 +168,213 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				</div>
 				<div class="hero-grid">
 					<div class="hero-copy">
-						<p class="eyebrow">Lead Software Engineer · Cloud Solutions Specialist</p>
+						<p class="eyebrow">Salesforce Solution Engineer · Agentforce · FinTech</p>
 						<h1>
 							Anmoldeep Singh Arora
-							<span>Building resilient FinTech systems and AI-powered Salesforce solutions.</span>
+							<span>
+								I turn slow, manual, compliance-heavy processes into fast, reliable Salesforce and
+								AI-powered systems.
+							</span>
 						</h1>
 						<p class="lead">
-							4+ years in Salesforce and FinTech, specializing in system architecture, API performance,
-							and secure enterprise integrations. Currently driving Agentforce automation at Accenture.
+							4+ years designing loan origination journeys for Tata Capital, enterprise integrations, and
+							Agentforce AI agents. Currently at Accenture, building agents that deflect inbound requests
+							and route cases against SLAs.
 						</p>
 						<div class="cta-row">
-							<button class="btn contact-trigger" type="button" data-open-contact>Open contact form</button>
-							<a class="btn outline" href="#experience">View experience</a>
+							<button class="btn contact-trigger" type="button" data-open-contact>Discuss your project</button>
+							<a class="btn outline" href="#work">See the results</a>
 						</div>
-						<div class="contact-row">
-							<span>Nagpur, Maharashtra, India</span>
-						</div>
+						<ul class="trust-row" aria-label="Credentials">
+							<li><strong>{salesforceCertCount}×</strong> Salesforce certified</li>
+							<li><strong>Top Talent</strong> FY25</li>
+							<li><strong>High Five &amp; Bravo</strong> awards</li>
+						</ul>
 						<div class="link-row">
-							<a href="https://linkedin.com/in/eduanmoldeep" target="_blank" rel="noreferrer">LinkedIn</a>
-							<a href="https://www.salesforce.com/trailblazer/anmoldeeparora" target="_blank" rel="noreferrer"
-								>Salesforce Trailblazer</a
-							>
+							<a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+							<a href={TRAILBLAZER_URL} target="_blank" rel="noreferrer">Salesforce Trailblazer ↗</a>
+							<span>Nagpur, India · open to remote</span>
 						</div>
 					</div>
 
 					<div class="hero-card">
-						<div class="badge">Top Talent – FY25</div>
-						<div class="hero-mascot" aria-hidden="true">
-							<svg viewBox="0 0 120 120">
-								<defs>
-									<linearGradient id="mascotGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-										<stop offset="0%" stop-color="rgba(242, 80, 47, 0.75)" />
-										<stop offset="100%" stop-color="rgba(47, 140, 133, 0.75)" />
-									</linearGradient>
-								</defs>
-								<circle class="mascot-body" cx="60" cy="60" r="38" fill="url(#mascotGradient)" />
-								<circle class="mascot-eye" cx="48" cy="54" r="5" fill="#0f1115" />
-								<circle class="mascot-eye" cx="72" cy="54" r="5" fill="#0f1115" />
-								<path class="mascot-smile" d="M46 70c8 10 20 10 28 0" fill="none" stroke="#0f1115" stroke-width="4" stroke-linecap="round" />
-								<circle class="mascot-blush" cx="42" cy="66" r="4" fill="rgba(242, 80, 47, 0.5)" />
-								<circle class="mascot-blush" cx="78" cy="66" r="4" fill="rgba(47, 140, 133, 0.5)" />
-							</svg>
+						<div class="hero-card-head">
+							<div>
+								<div class="badge">Top Talent – FY25</div>
+								<h2>Results in production</h2>
+								<p class="hero-card-sub">Measured outcomes from enterprise FinTech delivery.</p>
+							</div>
+							<!-- Decorative "system architecture" emblem: a hub orchestrating four connected systems -->
+							<div class="hero-emblem" aria-hidden="true">
+								<svg viewBox="0 0 120 120" focusable="false">
+									<defs>
+										<linearGradient id="emblemHub" x1="0%" y1="0%" x2="100%" y2="100%">
+											<stop class="emblem-stop-a" offset="0%" />
+											<stop class="emblem-stop-b" offset="100%" />
+										</linearGradient>
+									</defs>
+									<circle class="emblem-backdrop" cx="60" cy="60" r="56" />
+									<circle class="emblem-orbit" cx="60" cy="60" r="50" pathLength="100" />
+									<circle class="emblem-ring" cx="60" cy="60" r="26" />
+									<g class="emblem-links">
+										<line x1="60" y1="60" x2="95.36" y2="24.64" />
+										<line x1="60" y1="60" x2="95.36" y2="95.36" />
+										<line x1="60" y1="60" x2="24.64" y2="95.36" />
+										<line x1="60" y1="60" x2="24.64" y2="24.64" />
+									</g>
+									<g class="emblem-flow">
+										<line class="flow-out" x1="60" y1="60" x2="95.36" y2="24.64" pathLength="100" />
+										<line class="flow-in" x1="60" y1="60" x2="95.36" y2="95.36" pathLength="100" />
+										<line class="flow-out flow-late" x1="60" y1="60" x2="24.64" y2="95.36" pathLength="100" />
+										<line class="flow-in flow-late" x1="60" y1="60" x2="24.64" y2="24.64" pathLength="100" />
+									</g>
+									<g class="emblem-nodes">
+										<rect x="89.36" y="18.64" width="12" height="12" rx="3" />
+										<circle cx="95.36" cy="95.36" r="6.5" />
+										<rect x="18.64" y="89.36" width="12" height="12" rx="3" />
+										<circle cx="24.64" cy="24.64" r="6.5" />
+									</g>
+									<circle class="emblem-pulse" cx="60" cy="60" r="14" />
+									<circle class="emblem-hub" cx="60" cy="60" r="14" fill="url(#emblemHub)" />
+									<circle class="emblem-core" cx="60" cy="60" r="4.5" />
+								</svg>
+							</div>
 						</div>
-						<h2>Key Achievements</h2>
-						<ul>
-							<li>Recognized for long-term high-quality delivery and consistent client praise.</li>
-							<li>High Five & Bravo Awards for reusable modular code across loan journeys.</li>
-							<li>Reduced data-sync turnaround by over 90% with workflow automation.</li>
-							<li>Improved parser reliability from 32% to 86% with XML upgrades.</li>
+						<ul class="proof-grid">
+							{
+								proofStats.map((stat) => (
+									<li class="proof-item">
+										<strong class="metric">{stat.value}</strong>
+										<span class="proof-label">{stat.label}</span>
+										<span class="proof-detail">{stat.detail}</span>
+									</li>
+								))
+							}
 						</ul>
-						<div class="metrics">
-							<div>
-								<p class="metric">60%</p>
-								<span>Processing time reduction</span>
-							</div>
-							<div>
-								<p class="metric">95%+</p>
-								<span>Code coverage</span>
-							</div>
-							<div>
-								<p class="metric">30%</p>
-								<span>Lower SOQL calls</span>
-							</div>
-						</div>
+						<p class="hero-card-foot">
+							Recognised for reusable, modular code across loan journeys and consistent client praise.
+						</p>
 					</div>
 				</div>
 			</header>
 
-			<section id="summary" class="section">
+			<section class="logo-strip" aria-label="Where I've delivered">
+				<span class="logo-strip-label">Experience across</span>
+				<ul>
+					<li>Accenture</li>
+					<li>Persistent Systems</li>
+					<li>Tata Capital</li>
+				</ul>
+			</section>
+
+			<section id="services" class="section">
 				<div class="section-header">
-					<h2>Summary</h2>
+					<p class="section-kicker">How I can help</p>
+					<h2>Problems I solve</h2>
 					<p>
-						Lead SDE specializing in Salesforce and RESTful integrations. Skilled in designing robust
-						system architectures, optimizing API performance, and building secure, scalable FinTech
-						solutions using Apex, LWC, Agentforce, and REST APIs.
+						I work where business process, platform limits and compliance collide, and I design the
+						solution end to end, not just the code.
 					</p>
 				</div>
-				<div class="summary-grid">
-					<div class="summary-card">
-						<h3>Current Focus</h3>
-						<p>
-							Building intelligent Agentforce agents with Einstein AI, prompt templates, and Salesforce
-							Knowledge to deflect inbound requests and improve SLA.
-						</p>
-					</div>
-					<div class="summary-card">
-						<h3>Specialties</h3>
-						<p>
-							Salesforce architecture, secure integrations, data grounding, reusable component systems,
-							and AI-powered automation.
-						</p>
-					</div>
-					<div class="summary-card">
-						<h3>Domains</h3>
-						<p>FinTech lending, loan origination, case classification, and compliance.</p>
-					</div>
+				<div class="service-grid">
+					{
+						services.map((service, index) => (
+							<article class="service-card">
+								<span class="service-index" aria-hidden="true">
+									{String(index + 1).padStart(2, '0')}
+								</span>
+								<h3>{service.title}</h3>
+								<p>{service.body}</p>
+								<p class="service-outcome">
+									<span>Typical outcome</span>
+									{service.outcome}
+								</p>
+							</article>
+						))
+					}
 				</div>
+			</section>
+
+			<section id="work" class="section">
+				<div class="section-header">
+					<p class="section-kicker">Selected work</p>
+					<h2>Case studies</h2>
+					<p>The problem, how I approached it, and what changed. Each one is a decision I can walk you through in detail.</p>
+				</div>
+
+				<div class="case-grid">
+					{
+						caseStudies.map((study) => (
+							<article class="case-card">
+								<div class="case-card-head">
+									<p class="case-client">
+										{study.client}
+										<span> · via {study.via}</span>
+									</p>
+									{study.status && <span class="case-status">{study.status}</span>}
+								</div>
+								<h3>{study.title}</h3>
+								<dl class="case-steps">
+									<div>
+										<dt>Challenge</dt>
+										<dd>{study.challenge}</dd>
+									</div>
+									<div>
+										<dt>Approach</dt>
+										<dd>{study.approach}</dd>
+									</div>
+								</dl>
+								{study.results.length > 0 ? (
+									<ul class="case-results">
+										{study.results.map((result) => (
+											<li>
+												<strong>{result.value}</strong>
+												<span>{result.label}</span>
+											</li>
+										))}
+									</ul>
+								) : (
+									<p class="case-measure">{study.measure}</p>
+								)}
+								<div class="case-tags">
+									{study.tags.map((tag) => (
+										<span>{tag}</span>
+									))}
+								</div>
+							</article>
+						))
+					}
+				</div>
+				<p class="case-note">
+					Enterprise client details are limited to what can be shared publicly. I’m happy to walk
+					through the architecture and trade-offs on a call.
+				</p>
+			</section>
+
+			<section id="approach" class="section">
+				<div class="section-header">
+					<p class="section-kicker">How I work</p>
+					<h2>From messy process to measurable result</h2>
+					<p>The same four steps whether it’s an AI agent, a lending journey or a custom app.</p>
+				</div>
+				<ol class="process-grid">
+					{
+						process.map((item) => (
+							<li class="process-step">
+								<span class="process-num" aria-hidden="true">{item.step}</span>
+								<h3>{item.title}</h3>
+								<p>{item.body}</p>
+							</li>
+						))
+					}
+				</ol>
 			</section>
 
 			<section id="experience" class="section">
 				<div class="section-header">
-					<h2>Experience</h2>
-					<p>Driving impact across Accenture and Persistent Systems in FinTech delivery.</p>
+					<p class="section-kicker">Experience</p>
+					<h2>Where I’ve delivered</h2>
+					<p>Four years of continuous FinTech delivery, from developer to solution designer to AI agents.</p>
 				</div>
 
 				<div class="timeline">
@@ -156,10 +398,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 							<span class="role-sub">Tata Capital Limited · Loan Origination (FinTech)</span>
 						</div>
 						<ul>
-							<li>Solution designer across multiple journeys with reusable module strategy.</li>
-							<li>Built workflow-driven integration reducing data-sync by 90% (hours → minutes).</li>
-							<li>Optimized org-level SOQL usage with 30% fewer calls per execution.</li>
-							<li>Led migrations cutting processing time by 60% while maintaining compliance.</li>
+							<li>Solution designer across multiple journeys with a reusable module strategy.</li>
+							<li>Built a workflow-driven integration cutting data-sync time by <strong>90%</strong> (hours → minutes).</li>
+							<li>Optimised org-level SOQL usage: <strong>30% fewer</strong> calls per execution.</li>
+							<li>Led migrations cutting processing time by <strong>60%</strong> while maintaining compliance.</li>
 						</ul>
 					</article>
 
@@ -172,7 +414,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 						<ul>
 							<li>Built modules for Aggregator Journeys across PL, TW, Auto, and LAS.</li>
 							<li>Designed reusable Aura components and product-agnostic APIs.</li>
-							<li>Resolved priority escalations in SIT and production with zero defects.</li>
+							<li>Resolved priority escalations in SIT and production with <strong>zero defects</strong>.</li>
 							<li>Delivered secure integrations with encryption and RBI compliance checks.</li>
 						</ul>
 					</article>
@@ -185,9 +427,9 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 						</div>
 						<ul>
 							<li>Contributor for Aggregator Journeys across PL, TW, and Consumer Durable loans.</li>
-							<li>Upgraded XML parsers improving reliability from 32% to 86%.</li>
-							<li>Enhanced legacy integration APIs for RBI guidelines and unit-tested delivery.</li>
-							<li>Ensured deployment readiness with 95%+ Apex code coverage.</li>
+							<li>Upgraded XML parsers, improving reliability from <strong>32% to 86%</strong>.</li>
+							<li>Enhanced legacy integration APIs for RBI guidelines with unit-tested delivery.</li>
+							<li>Ensured deployment readiness with <strong>95%+</strong> Apex code coverage.</li>
 						</ul>
 					</article>
 				</div>
@@ -195,59 +437,61 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 			<section id="skills" class="section">
 				<div class="section-header">
-					<h2>Skills</h2>
-					<p>Salesforce-first expertise with strong full-stack and cloud capabilities.</p>
+					<p class="section-kicker">Toolkit</p>
+					<h2>Skills by capability</h2>
+					<p>Salesforce-first, with the full-stack range to deliver when the answer isn’t Salesforce.</p>
 				</div>
-				<div class="skills-grid">
-					<div class="skills-card">
-						<h3>Salesforce</h3>
-						<p>
-							Apex, LWC, Triggers, Tests, Flows, Security Model, Validation Rules, Aura, SOQL,
-							Visualforce, Platform Events, Change Data Capture, Named Credentials, Custom Apex APIs,
-							External Objects, Modular APIs, Encryption, Agentforce, Einstein AI, Prompt Templates,
-							Agent Actions, Omni-Channel.
-						</p>
-					</div>
-					<div class="skills-card">
-						<h3>Beyond Salesforce</h3>
-						<p>
-							NodeJS, Filament PHP, Laravel, RBAC, JWT, SSO, MFA, MariaDB, Redis, Memcached, AWS
-							(Rekognition, S3, EC2, EBS), Agile/Scrum, JIRA, Confluence, Git, VS Code, SFDX CLI,
-							Data Loader, Lightning Studio, OmniStudio, REST/SOAP APIs, Swagger.
-						</p>
-					</div>
+				<div class="skill-groups">
+					{
+						skillGroups.map((group) => (
+							<div class="skill-group">
+								<h3>{group.title}</h3>
+								<ul class="chips">
+									{group.items.map((item) => (
+										<li>{item}</li>
+									))}
+								</ul>
+							</div>
+						))
+					}
 				</div>
 			</section>
 
-			<section class="section">
+			<section id="certifications" class="section">
 				<div class="section-header">
-					<h2>Certifications</h2>
-					<p>Salesforce and cloud credentials focused on AI, data, and platform delivery.</p>
+					<p class="section-kicker">Verified credentials</p>
+					<h2>{certifications.length} certifications, {salesforceCertCount} from Salesforce</h2>
+					<p>
+						Covering AI, data and platform development, all verifiable on
+						<a class="text-link" href={TRAILBLAZER_URL} target="_blank" rel="noreferrer">my Trailblazer profile ↗</a>.
+					</p>
 				</div>
-				<div class="chips">
-					<span>Salesforce Certified JavaScript Developer (Mar 2025)</span>
-					<span>Salesforce Certified Data Cloud Consultant (Dec 2024)</span>
-					<span>Salesforce Certified Agentforce Specialist (Oct 2024)</span>
-					<span>Salesforce Certified Platform Developer II (May 2024)</span>
-					<span>Salesforce Certified AI Associate (Dec 2023)</span>
-					<span>Salesforce Certified Platform Developer I (Mar 2023)</span>
-					<span>Microsoft Certified: Azure Fundamentals AZ-900 (Jun 2022)</span>
-				</div>
+				<ul class="cert-grid">
+					{
+						certifications.map((cert) => (
+							<li class="cert-card">
+								<span class="cert-issuer">{cert.issuer} Certified</span>
+								<strong>{cert.name}</strong>
+								<span class="cert-date">{cert.date}</span>
+							</li>
+						))
+					}
+				</ul>
 			</section>
 
 			<section id="education" class="section">
 				<div class="section-header">
+					<p class="section-kicker">Foundation</p>
 					<h2>Education</h2>
-					<p>Strong academic foundation with specialization in AI and ML.</p>
 				</div>
 				<div class="education-card">
 					<div>
 						<h3>Bachelor of Engineering in Computer Technology</h3>
 						<p>Yeshwantrao Chavan College of Engineering · 2019 – 2022</p>
-						<span>Honors: Artificial Intelligence & Machine Learning</span>
+						<span>Honors: Artificial Intelligence &amp; Machine Learning</span>
 					</div>
 					<div class="training">
-						<h4>Training / Courses</h4>
+						<h4>System design training</h4>
 						<ul>
 							<li>Grokking System Design Fundamentals</li>
 							<li>Grokking System Design Interview</li>
